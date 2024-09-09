@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AMA Tutor</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script src="https://kit.fontawesome.com/0adc713a9a.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container-fluid d-flex vh-100" style="border-top: 5px solid #ee8123;">
+      <div class="row align-self-stretch w-100">
+        <div class="col-md-2 mx-auto sec-color-bg bg-light text-white">
+          <div class='w-100 text-align-center d-flex justify-content-center mt-4 '>
+           <%= link_to image_tag("ama-logo-hero.png", size: "200x56", alt: "Edit Entry"), url:root_path %>
+          </div>
+          <div class='w-100 text-align-center d-flex justify-content-center mt-3 '>
+            <%= form_with(model: Chat.new) do |form| %>
+              <%= form.submit '+ New Topic', class: 'btn bg-accent-st btn-accent border-light' if current_user.present? %>
+            <% end %>
+          </div>
+          <div class="mt-3" style='min-height: 50%;'>
+            <% if current_user.present? %>
+
+            <h5 class="accent-color-st">General Topics</h5>
+            <turbo-frame id="user-chats">
+              <%= render partial: 'chats/chat_list', collection: current_user.chats.reverse %>
+            </turbo-frame>
+            <% end %>
+          </div>
+
+          <div class="mt-3">
+            <% if current_user.present? %>
+          <div id="user-chats-lectures" style="">
+              <h5 class="accent-color-st"> Course Lectures </h5>
+              <p> Coming soon </p>
+            </div>
+             <% end %>
+          </div>
+
+
+        </div>
+        <div class='col-10 mt-3 min-ht-40' >
+          <%= yield %>
+        </div>
+      </div>
+          <%= button_to("", destroy_user_session_path,method: :delete, class: 'btn bordernone btn-accent bi bi-x-circle', title: "Sign Out") if current_user.present? do %>
+          <% end %>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+
+$primary-color: #61777F;
+$sec-color: #61777F;
+$accent-color: #ee8123;
+
+.primary-color-st {
+	color: $primary-color !important;
+}
+
+.sec-color-st {
+	color: $sec-color !important;
+}
+
+.accent-color-st {
+	color: $accent-color !important;
+}
+
+.bg-pc-st {
+	background-color: $primary-color !important;
+}
+
+.bg-sec-st {
+	background-color: $sec-color !important;
+}
+
+.bg-accent-st {
+	background-color: $accent-color !important;
+}
+
+.btn-accent {
+	color: $white !important;
+	background-color: $accent-color !important;
+	&:hover {
+	 color: $white !important;
+	}
+ }
+
+.btn-sec {
+	color: $white !important;
+	background-color: $sec-color !important;
+}
+
+.btn-prim {
+	color: $white !important;
+	background-color: $primary-color !important;
+}
+
+.min-ht-40 {
+	min-height: 40%;
+	
+}

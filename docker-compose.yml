@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14.8
+    container_name: "postgres"
+    command: ["postgres", "-c", "logging_collector=on", "-c", "log_filename=postgresql.log", "-c", "log_statement=all"]
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0.8
+    command: redis-server --appendonly yes
+    ports:
+      - target: 6379
+        published: ${REDIS_PORT}
+        protocol: tcp
+        mode: host
+    volumes:
+        - redis_data:/data
+    restart: always
+    environment:
+      - REDIS_REPLICATION_MODE=master
+  weaviate_anon:
+    command:
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8080'
+    - --scheme
+    - http
+    image: cr.weaviate.io/semitechnologies/weaviate:1.26.4
+    ports:
+    - 8080:8080
+    - 50051:50051
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      ENABLE_MODULES: 'generative-openai,generative-cohere, text2vec-ollama'
+      BACKUP_FILESYSTEM_PATH: '/var/lib/weaviate/backups'
+      CLUSTER_HOSTNAME: 'node1'
+volumes:
+  redis_data:
+  pg_data: 
