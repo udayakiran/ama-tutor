@@ -2,6 +2,7 @@
 
 Ama Tutor
 
+
 Ask-Me-Anything Tutor 
 
 ## Setup instructions
@@ -25,4 +26,9 @@ Ask-Me-Anything Tutor
     > docker compose up.
     
     > rails g server
+
+<To be updated>
+
+   
+
    
