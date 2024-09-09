@@ -4,10 +4,25 @@ Ama Tutor
 
 Ask-Me-Anything Tutor 
 
-This code will:
+## Setup instructions
 
-- Let you create/manage users by hooking in Devise
-- Let you create conversations with Ollama's locally hosted Llama3.1 LLM that are assigned to a user
-- Let you save and retrieve these conversations so that they can be continued at any time.
+1. Checkout the repo.
+2. Install Ruby 3.3.5 (using rbenv)
+3. go to amatutor drive and run below
 
-As I have tried to keep this on target I am not doing any error checking, nor am I doing the stuff we don’t specifically need for this (logging out, creating users via UI, etc etc). I leave that as an exercise to the reader!
+   > brew install rbenv
+   
+   > rbenv install 3.3.5
+
+    > rbenv local 3.3.5
+
+   > rbenv exec bundle install
+
+5. Download ollama
+   > ollama run llama3.1
+
+6. Go to project directory and run
+    > docker compose up.
+    
+    > rails g server
+   
